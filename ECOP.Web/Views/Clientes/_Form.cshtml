@@ -1,0 +1,34 @@
+@model ClienteFormViewModel
+
+<div class="mb-3">
+    <label asp-for="Nombre" class="form-label fw-semibold"></label>
+    <input asp-for="Nombre" class="form-control" />
+    <span asp-validation-for="Nombre" class="text-danger small"></span>
+</div>
+<div class="mb-3">
+    <label asp-for="Apellido" class="form-label fw-semibold"></label>
+    <input asp-for="Apellido" class="form-control" />
+    <span asp-validation-for="Apellido" class="text-danger small"></span>
+</div>
+<div class="mb-3">
+    <label asp-for="TipoDocumentoId" class="form-label fw-semibold"></label>
+    <select asp-for="TipoDocumentoId" asp-items="Model.TiposDocumento" class="form-select">
+        <option value="">-- Seleccionar --</option>
+    </select>
+    <span asp-validation-for="TipoDocumentoId" class="text-danger small"></span>
+</div>
+<div class="mb-3">
+    <label asp-for="NroDocumento" class="form-label fw-semibold"></label>
+    <input asp-for="NroDocumento" class="form-control" />
+    <span asp-validation-for="NroDocumento" class="text-danger small"></span>
+</div>
+<div class="mb-3">
+    <label asp-for="Email" class="form-label fw-semibold"></label>
+    <input asp-for="Email" class="form-control" />
+    <span asp-validation-for="Email" class="text-danger small"></span>
+</div>
+<div class="mb-3">
+    <label asp-for="Telefono" class="form-label fw-semibold"></label>
+    <input asp-for="Telefono" class="form-control" />
+    <span asp-validation-for="Telefono" class="text-danger small"></span>
+</div>

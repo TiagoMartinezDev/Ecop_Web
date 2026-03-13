@@ -1,0 +1,74 @@
+@model PedidoDetalleViewModel
+@{ ViewData["Title"] = $"Pedido {Model.NumeroPedido}"; }
+
+<div class="d-flex align-items-center mb-3 gap-2">
+    <a asp-action="Index" class="btn btn-outline-secondary btn-sm"><i class="bi bi-arrow-left"></i></a>
+    <h2 class="mb-0"><i class="bi bi-receipt me-2"></i>Pedido <span class="font-monospace">@Model.NumeroPedido</span></h2>
+</div>
+
+<div class="row g-3">
+    <div class="col-md-5">
+        <div class="card shadow-sm h-100">
+            <div class="card-header fw-semibold bg-warning bg-opacity-25">Datos del Pedido</div>
+            <div class="card-body">
+                <dl class="row mb-0">
+                    <dt class="col-sm-5">Cliente</dt>
+                    <dd class="col-sm-7">@Model.Cliente</dd>
+                    <dt class="col-sm-5">Fecha</dt>
+                    <dd class="col-sm-7">@Model.FechaPedido.ToString("dd/MM/yyyy HH:mm")</dd>
+                    <dt class="col-sm-5">Estado</dt>
+                    <dd class="col-sm-7"><span class="badge bg-primary">@Model.Estado</span></dd>
+                    <dt class="col-sm-5">Observaciones</dt>
+                    <dd class="col-sm-7">@(Model.Observaciones ?? "-")</dd>
+                </dl>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-7">
+        <div class="card shadow-sm">
+            <div class="card-header fw-semibold bg-warning bg-opacity-25">Detalle de Productos</div>
+            <div class="card-body p-0">
+                <table class="table table-sm mb-0">
+                    <thead class="table-light">
+                        <tr>
+                            <th>Código</th>
+                            <th>Descripción</th>
+                            <th>UM</th>
+                            <th class="text-end">Cant.</th>
+                            <th class="text-end">Precio</th>
+                            <th class="text-end">Subtotal</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (var d in Model.Detalles)
+                        {
+                            <tr>
+                                <td><span class="badge bg-secondary">@d.Codigo</span></td>
+                                <td>@d.Descripcion</td>
+                                <td>@d.UnidadMedida</td>
+                                <td class="text-end fw-semibold">@d.Cantidad</td>
+                                <td class="text-end">@d.PrecioUnitario.ToString("N0")</td>
+                                <td class="text-end">@d.Subtotal.ToString("N0")</td>
+                            </tr>
+                        }
+                    </tbody>
+                    <tfoot class="table-warning fw-semibold">
+                        <tr>
+                            <td colspan="3">TOTALES</td>
+                            <td class="text-end">@Model.TotalCantidad</td>
+                            <td></td>
+                            <td class="text-end">Gs. @Model.TotalMonto.ToString("N0")</td>
+                        </tr>
+                    </tfoot>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="mt-3 d-flex gap-2">
+    <a asp-action="CambiarEstado" asp-route-id="@Model.Id" class="btn btn-primary btn-sm">
+        <i class="bi bi-arrow-left-right me-1"></i>Cambiar Estado
+    </a>
+    <a asp-action="Index" class="btn btn-outline-secondary btn-sm">Volver</a>
+</div>

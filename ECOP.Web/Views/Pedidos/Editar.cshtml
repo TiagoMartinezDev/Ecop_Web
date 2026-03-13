@@ -1,0 +1,265 @@
+@model PedidoEditarViewModel
+@{ ViewData["Title"] = $"Editar Pedido {Model.NumeroPedido}"; }
+
+<div class="d-flex align-items-center mb-3 gap-2">
+    <a asp-action="Detalle" asp-route-id="@Model.Id" class="btn btn-outline-secondary btn-sm">
+        <i class="bi bi-arrow-left"></i>
+    </a>
+    <h2 class="mb-0">
+        <i class="bi bi-pencil-square me-2"></i>Editar Pedido
+        <span class="font-monospace">@Model.NumeroPedido</span>
+    </h2>
+    <span class="badge bg-primary ms-2">@Model.EstadoActual</span>
+</div>
+
+<form asp-action="Editar" asp-route-id="@Model.Id" method="post" id="formEditar">
+    @Html.AntiForgeryToken()
+    <input type="hidden" asp-for="Id" />
+    <input type="hidden" asp-for="NumeroPedido" />
+    <input type="hidden" asp-for="EstadoActual" />
+
+    @if (!ViewData.ModelState.IsValid)
+    {
+        <div class="alert alert-danger">
+            @foreach (var error in ViewData.ModelState.Values.SelectMany(v => v.Errors))
+            {
+                <div>@error.ErrorMessage</div>
+            }
+        </div>
+    }
+
+    <div class="row g-3">
+        <!-- Panel izquierdo -->
+        <div class="col-md-4">
+            <div class="card shadow-sm">
+                <div class="card-header fw-semibold bg-warning bg-opacity-25">Datos del Pedido</div>
+                <div class="card-body">
+                    <div class="mb-3">
+                        <label asp-for="ClienteId" class="form-label fw-semibold">Cliente</label>
+                        <select asp-for="ClienteId" asp-items="Model.Clientes" class="form-select">
+                            <option value="">-- Seleccionar cliente --</option>
+                        </select>
+                        <span asp-validation-for="ClienteId" class="text-danger small"></span>
+                    </div>
+                    <div class="mb-3">
+                        <label asp-for="Observaciones" class="form-label fw-semibold">Observaciones</label>
+                        <textarea asp-for="Observaciones" class="form-control" rows="3"></textarea>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Selector de producto -->
+            <div class="card shadow-sm mt-3">
+                <div class="card-header fw-semibold bg-primary bg-opacity-10">Agregar Producto</div>
+                <div class="card-body">
+                    <div class="mb-2">
+                        <label class="form-label small fw-semibold">Producto</label>
+                        <select id="selectProducto" asp-items="Model.Productos" class="form-select form-select-sm">
+                            <option value="">-- Seleccionar --</option>
+                        </select>
+                    </div>
+                    <div class="mb-2">
+                        <label class="form-label small fw-semibold">Cantidad</label>
+                        <input type="number" id="inputCantidad" class="form-control form-control-sm text-end" min="1" value="1" />
+                    </div>
+                    <div class="mb-2">
+                        <label class="form-label small fw-semibold">Precio Unit.</label>
+                        <div class="input-group input-group-sm">
+                            <span class="input-group-text">Gs.</span>
+                            <input type="text" id="inputPrecio" class="form-control text-end" readonly />
+                        </div>
+                    </div>
+                    <button type="button" id="btnAgregar" class="btn btn-primary btn-sm w-100">
+                        <i class="bi bi-plus-circle me-1"></i>Agregar al pedido
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Panel derecho -->
+        <div class="col-md-8">
+            <div class="card shadow-sm">
+                <div class="card-header fw-semibold bg-warning bg-opacity-25">Productos del Pedido</div>
+                <div class="card-body p-0">
+                    <table class="table table-sm mb-0" id="tablaItems">
+                        <thead class="table-light">
+                            <tr>
+                                <th>Código</th>
+                                <th>Descripción</th>
+                                <th>UM</th>
+                                <th class="text-end">Cant.</th>
+                                <th class="text-end">Precio</th>
+                                <th class="text-end">Subtotal</th>
+                                <th></th>
+                            </tr>
+                        </thead>
+                        <tbody id="tbodyItems">
+                            @for (int i = 0; i < Model.Items.Count; i++)
+                            {
+                                <tr data-producto-id="@Model.Items[i].ProductoId">
+                                    <td><span class="badge bg-secondary">@Model.Items[i].Codigo</span></td>
+                                    <td>@Model.Items[i].Descripcion</td>
+                                    <td>@Model.Items[i].UnidadMedida</td>
+                                    <td class="text-end">@Model.Items[i].Cantidad</td>
+                                    <td class="text-end">@Model.Items[i].PrecioUnitario.ToString("N0")</td>
+                                    <td class="text-end subtotal">@Model.Items[i].Subtotal.ToString("N0")</td>
+                                    <td class="text-end">
+                                        <button type="button" class="btn btn-sm btn-outline-danger btn-quitar">
+                                            <i class="bi bi-trash"></i>
+                                        </button>
+                                    </td>
+                                    <input type="hidden" name="Items[@i].ProductoId"     value="@Model.Items[i].ProductoId" />
+                                    <input type="hidden" name="Items[@i].Codigo"         value="@Model.Items[i].Codigo" />
+                                    <input type="hidden" name="Items[@i].Descripcion"    value="@Model.Items[i].Descripcion" />
+                                    <input type="hidden" name="Items[@i].UnidadMedida"   value="@Model.Items[i].UnidadMedida" />
+                                    <input type="hidden" name="Items[@i].Cantidad"       value="@Model.Items[i].Cantidad" />
+                                    <input type="hidden" name="Items[@i].PrecioUnitario" value="@Model.Items[i].PrecioUnitario" />
+                                </tr>
+                            }
+                        </tbody>
+                        <tfoot>
+                            <tr id="rowVacio" class="@(Model.Items.Any() ? "d-none" : "")">
+                                <td colspan="7" class="text-center text-muted py-4">
+                                    Agregue productos usando el panel izquierdo.
+                                </td>
+                            </tr>
+                            <tr class="table-warning fw-semibold">
+                                <td colspan="3">TOTALES</td>
+                                <td class="text-end" id="totalCantidad">@Model.TotalCantidad</td>
+                                <td></td>
+                                <td class="text-end" id="totalMonto">Gs. @Model.TotalMonto.ToString("N0")</td>
+                                <td></td>
+                            </tr>
+                        </tfoot>
+                    </table>
+                </div>
+                <div class="card-footer d-flex justify-content-end gap-2">
+                    <button type="submit" class="btn btn-warning">
+                        <i class="bi bi-save me-1"></i>Guardar Cambios
+                    </button>
+                    <a asp-action="Detalle" asp-route-id="@Model.Id" class="btn btn-outline-secondary">Cancelar</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</form>
+
+@section Scripts {
+<script>
+    let itemIndex = @Model.Items.Count;
+    const items = {};
+
+    @foreach (var item in Model.Items)
+    {
+        <text>items[@item.ProductoId] = true;</text>
+    }
+
+    document.getElementById('formEditar').addEventListener('submit', function () {
+        renumerarItems();
+    });
+
+    function renumerarItems() {
+        const filas = document.querySelectorAll('#tbodyItems tr');
+            filas.forEach((tr, i) => {
+                tr.querySelectorAll('input[type=hidden]').forEach(input => {
+                    input.name = input.name.replace(/Items\[\d+\]/, `Items[${i}]`);
+                });
+            });
+    }
+
+    document.getElementById('selectProducto').addEventListener('change', async function () {
+        const id = this.value;
+        document.getElementById('inputPrecio').value = '';
+        if (!id) return;
+        const resp = await fetch(`/Pedidos/ObtenerProducto/${id}`);
+        if (!resp.ok) return;
+        const data = await resp.json();
+        document.getElementById('inputPrecio').value = data.precioUnitario.toLocaleString('es-PY');
+        document.getElementById('inputPrecio').dataset.precio = data.precioUnitario;
+        document.getElementById('inputPrecio').dataset.codigo = data.codigo;
+        document.getElementById('inputPrecio').dataset.descripcion = data.descripcion;
+        document.getElementById('inputPrecio').dataset.unidad = data.unidadMedida;
+        document.getElementById('inputPrecio').dataset.stock = data.stock;
+    });
+
+    document.getElementById('btnAgregar').addEventListener('click', function () {
+        const sel    = document.getElementById('selectProducto');
+        const cant   = parseInt(document.getElementById('inputCantidad').value);
+        const precio = parseFloat(document.getElementById('inputPrecio').dataset.precio);
+        const prodId = parseInt(sel.value);
+        const stock = parseInt(document.getElementById('inputPrecio').dataset.stock ?? '0');
+
+        if (cant > stock) {
+            alert(`Stock insuficiente. Disponible: ${stock}`);
+            return;
+        }
+
+        if (!prodId || isNaN(cant) || cant < 1 || isNaN(precio)) {
+            alert('Seleccioná un producto y una cantidad válida.');
+            return;
+        }
+        if (items[prodId]) {
+            alert('Ese producto ya fue agregado.');
+            return;
+        }
+
+        const codigo      = document.getElementById('inputPrecio').dataset.codigo;
+        const descripcion = document.getElementById('inputPrecio').dataset.descripcion;
+        const unidad      = document.getElementById('inputPrecio').dataset.unidad;
+        const subtotal    = cant * precio;
+        const i           = itemIndex++;
+
+        items[prodId] = true;
+        document.getElementById('rowVacio').classList.add('d-none');
+
+        const tr = document.createElement('tr');
+        tr.dataset.productoId = prodId;
+        tr.innerHTML = `
+            <td><span class="badge bg-secondary">${codigo}</span></td>
+            <td>${descripcion}</td>
+            <td>${unidad}</td>
+            <td class="text-end">${cant}</td>
+            <td class="text-end">${precio.toLocaleString('es-PY')}</td>
+            <td class="text-end subtotal">${subtotal.toLocaleString('es-PY')}</td>
+            <td class="text-end">
+                <button type="button" class="btn btn-sm btn-outline-danger btn-quitar"><i class="bi bi-trash"></i></button>
+            </td>
+            <input type="hidden" name="Items[${i}].ProductoId"     value="${prodId}" />
+            <input type="hidden" name="Items[${i}].Codigo"         value="${codigo}" />
+            <input type="hidden" name="Items[${i}].Descripcion"    value="${descripcion}" />
+            <input type="hidden" name="Items[${i}].UnidadMedida"   value="${unidad}" />
+            <input type="hidden" name="Items[${i}].Cantidad"       value="${cant}" />
+            <input type="hidden" name="Items[${i}].PrecioUnitario" value="${precio}" />
+        `;
+        document.getElementById('tbodyItems').appendChild(tr);
+        actualizarTotales();
+
+        sel.value = '';
+        document.getElementById('inputCantidad').value = 1;
+        document.getElementById('inputPrecio').value = '';
+    });
+
+    document.getElementById('tbodyItems').addEventListener('click', function (e) {
+        const btn = e.target.closest('.btn-quitar');
+        if (!btn) return;
+        const tr = btn.closest('tr');
+        delete items[parseInt(tr.dataset.productoId)];
+        tr.remove();
+        actualizarTotales();
+        if (document.getElementById('tbodyItems').rows.length === 0)
+            document.getElementById('rowVacio').classList.remove('d-none');
+    });
+
+    function actualizarTotales() {
+        let totalCant = 0, totalMonto = 0;
+        document.querySelectorAll('#tbodyItems tr').forEach(tr => {
+            const cant   = parseFloat(tr.querySelector('input[name$="].Cantidad"]')?.value || 0);
+            const precio = parseFloat(tr.querySelector('input[name$="].PrecioUnitario"]')?.value || 0);
+            totalCant  += cant;
+            totalMonto += cant * precio;
+        });
+        document.getElementById('totalCantidad').textContent = totalCant;
+        document.getElementById('totalMonto').textContent = 'Gs. ' + totalMonto.toLocaleString('es-PY');
+    }
+</script>
+}
