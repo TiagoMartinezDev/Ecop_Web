@@ -1,2 +1,0 @@
-D:\Projects\Ecop_Web\ECOP.Web\wwwroot\css\site.css
-wwwroot\css\site.css

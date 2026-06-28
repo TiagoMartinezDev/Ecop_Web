@@ -1,23 +1,23 @@
 {
   "format": 1,
   "restore": {
-    "D:\\Projects\\Ecop_Web\\ECOP.Models\\ECOP.Models.csproj": {}
+    "C:\\Users\\Romina\\Desktop\\Cursos\\Git\\Ecop_Web\\ECOP.Models\\ECOP.Models.csproj": {}
   },
   "projects": {
-    "D:\\Projects\\Ecop_Web\\ECOP.Models\\ECOP.Models.csproj": {
+    "C:\\Users\\Romina\\Desktop\\Cursos\\Git\\Ecop_Web\\ECOP.Models\\ECOP.Models.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "D:\\Projects\\Ecop_Web\\ECOP.Models\\ECOP.Models.csproj",
+        "projectUniqueName": "C:\\Users\\Romina\\Desktop\\Cursos\\Git\\Ecop_Web\\ECOP.Models\\ECOP.Models.csproj",
         "projectName": "ECOP.Models",
-        "projectPath": "D:\\Projects\\Ecop_Web\\ECOP.Models\\ECOP.Models.csproj",
-        "packagesPath": "C:\\Users\\tiago\\.nuget\\packages\\",
-        "outputPath": "D:\\Projects\\Ecop_Web\\ECOP.Models\\obj\\",
+        "projectPath": "C:\\Users\\Romina\\Desktop\\Cursos\\Git\\Ecop_Web\\ECOP.Models\\ECOP.Models.csproj",
+        "packagesPath": "C:\\Users\\Romina\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\Romina\\Desktop\\Cursos\\Git\\Ecop_Web\\ECOP.Models\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
         ],
         "configFilePaths": [
-          "C:\\Users\\tiago\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\Romina\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
@@ -65,7 +65,7 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\9.0.311/PortableRuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\9.0.314/PortableRuntimeIdentifierGraph.json"
         }
       }
     }

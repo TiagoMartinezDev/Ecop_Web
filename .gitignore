@@ -1,0 +1,120 @@
+# Build results
+bin/
+obj/
+*.dll
+*.exe
+*.o
+*.so
+
+# Visual Studio
+.vs/
+.vscode/
+*.sln.docstates
+*.user
+*.userosscache
+*.sln.user
+*.suo
+*.user
+*.VC.db
+*.VC.VC.opendb
+
+# Visual Studio Code
+.vscode/
+*.code-workspace
+
+# Resharper
+.resharper
+*.resharper
+_ReSharper*/
+.ReSharper/
+
+# NuGet
+*.nupkg
+*.snupkg
+.nuget/
+project.lock.json
+project.assets.json
+packages/
+.packages/
+
+# Local database files
+*.mdf
+*.ldf
+*.sqlite
+*.db
+*.db-shm
+*.db-wal
+
+# Entity Framework
+Migrations/
+
+# Logs
+logs/
+*.log
+*.txt
+
+# Runtime data
+pids/
+*.pid
+*.seed
+*.pid.lock
+
+# Node (if using Node.js tools)
+node_modules/
+npm-debug.log
+yarn-error.log
+
+# Environment variables
+.env
+.env.local
+.env.*.local
+appsettings.local.json
+appsettings.Development.json
+
+# OS files
+.DS_Store
+Thumbs.db
+*.swp
+*.swo
+*~
+
+# IDE
+.idea/
+*.swp
+*.iml
+
+# Coverage
+coverage/
+.coverage
+
+# Build output
+artifacts/
+dist/
+build/
+
+# Test results
+TestResults/
+*.trx
+
+# Local app config
+config.local.xml
+web.config.local
+web.Release.config
+
+# Temp files
+*.tmp
+temp/
+tmp/
+
+# User-specific
+[Bb]in/
+[Oo]bj/
+[Ll]og/
+[Ll]ogs/
+
+# Visual Studio temporary build file (not committed)
+.vs/
+
+# Published applications
+PublishProfiles/
+publish/

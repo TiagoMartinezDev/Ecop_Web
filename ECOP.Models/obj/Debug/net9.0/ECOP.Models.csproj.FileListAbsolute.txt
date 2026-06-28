@@ -42,3 +42,15 @@ D:\Projects\Ecop_Web\ECOP.Models\obj\Debug\net9.0\ECOP.Models.dll
 D:\Projects\Ecop_Web\ECOP.Models\obj\Debug\net9.0\refint\ECOP.Models.dll
 D:\Projects\Ecop_Web\ECOP.Models\obj\Debug\net9.0\ECOP.Models.pdb
 D:\Projects\Ecop_Web\ECOP.Models\obj\Debug\net9.0\ref\ECOP.Models.dll
+C:\Users\Romina\Desktop\Cursos\Git\Ecop_Web\ECOP.Models\bin\Debug\net9.0\ECOP.Models.deps.json
+C:\Users\Romina\Desktop\Cursos\Git\Ecop_Web\ECOP.Models\bin\Debug\net9.0\ECOP.Models.dll
+C:\Users\Romina\Desktop\Cursos\Git\Ecop_Web\ECOP.Models\bin\Debug\net9.0\ECOP.Models.pdb
+C:\Users\Romina\Desktop\Cursos\Git\Ecop_Web\ECOP.Models\obj\Debug\net9.0\ECOP.Models.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\Romina\Desktop\Cursos\Git\Ecop_Web\ECOP.Models\obj\Debug\net9.0\ECOP.Models.AssemblyInfoInputs.cache
+C:\Users\Romina\Desktop\Cursos\Git\Ecop_Web\ECOP.Models\obj\Debug\net9.0\ECOP.Models.AssemblyInfo.cs
+C:\Users\Romina\Desktop\Cursos\Git\Ecop_Web\ECOP.Models\obj\Debug\net9.0\ECOP.Models.csproj.CoreCompileInputs.cache
+C:\Users\Romina\Desktop\Cursos\Git\Ecop_Web\ECOP.Models\obj\Debug\net9.0\ECOP.Models.sourcelink.json
+C:\Users\Romina\Desktop\Cursos\Git\Ecop_Web\ECOP.Models\obj\Debug\net9.0\ECOP.Models.dll
+C:\Users\Romina\Desktop\Cursos\Git\Ecop_Web\ECOP.Models\obj\Debug\net9.0\refint\ECOP.Models.dll
+C:\Users\Romina\Desktop\Cursos\Git\Ecop_Web\ECOP.Models\obj\Debug\net9.0\ECOP.Models.pdb
+C:\Users\Romina\Desktop\Cursos\Git\Ecop_Web\ECOP.Models\obj\Debug\net9.0\ref\ECOP.Models.dll
