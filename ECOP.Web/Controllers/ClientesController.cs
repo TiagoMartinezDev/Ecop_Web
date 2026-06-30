@@ -144,9 +144,11 @@ public class ClientesController( IClienteRepositorio clienteRepo, ITipoDocumento
     [ValidateAntiForgeryToken]
     public async Task<IActionResult> Eliminar(int id)
     {
-        await clienteRepo.EliminarAsync(id);
-        TempData["Exito"] = "Cliente eliminado correctamente.";
+        /*await clienteRepo.EliminarAsync(id);
+        TempData["Exito"] = "Cliente eliminado correctamente.";*/
+        TempData["Error"] = "Esto es un mensaje de error de prueba.";
         return RedirectToAction(nameof(Index));
+       // return RedirectToAction(nameof(Index));
     }
 
     private async Task<IEnumerable<SelectListItem>> GetTiposDocumentoSelectAsync()
